@@ -20,7 +20,7 @@ const playerSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-  },
+  }/*,
   name: {
     type: String,
     required: [true, 'name is required'],
@@ -50,10 +50,27 @@ const playerSchema = new mongoose.Schema({
   levelInGame: {
     type: String,
   }*/
-})
+}, { timestamps: true })
 
 
+//bcrypt: esto antes de guardar el password, lo encripta
 
- 
+playerSchema.pre('save', function(next) {
+  const player = this;
+  bcrypt.genSalt(SALT_WORK_FACTOR)
+    .then(salt => {
+      return bcrypt.hash(player.password, salt)
+        .then(hash => {
+          player.password = hash;
+          next();
+        });
+    })
+    .catch(error => next(error));
+});
+
+playerSchema.methods.checkPassword = function(password) {
+  return bcrypt.compare(password, this.password);
+}
+
 const Player = mongoose.model('Player', playerSchema);
 module.exports = Player;

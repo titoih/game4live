@@ -1,14 +1,26 @@
 <h1>Register Page</h1>
-<form action="/login" method="POST">
+<form action="/register" method="POST">
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
-    <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <input name="email" type="email" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="exampleFormControlInput1" placeholder="name@example.com" value="{{player.email}}">
+      <div class="invalid-feedback">
+        {{ errors.email }}
+      </div>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
-  <div class="form-group">
+
+
+  <!-- 
+    
+    => ABAJO CÓDIGO ACTIVO DE ENVIO DATOS, puedes descomentar para editar<=
+
+  aquí podemos poner todo lo que falta con options y multiselectores)
+  descomentalo y ves los campos de bootstrap que hay-->
+
+  <!--<div class="form-group">
     <label for="exampleFormControlSelect1">Example select</label>
     <select class="form-control" id="exampleFormControlSelect1">
       <option>1</option>
@@ -31,7 +43,9 @@
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
+  </div>-->
+
+
    <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
