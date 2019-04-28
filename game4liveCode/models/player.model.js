@@ -9,6 +9,7 @@ const SALT_WORK_FACTOR = 10;
 // const SCHEDULES_LIST = constants.SCHEDULES_LIST
 
 const playerSchema = new mongoose.Schema({
+  name: String,
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -20,7 +21,10 @@ const playerSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-  }/*,
+  },
+  avatarURL: String,
+  googleID: String
+  /*,
   name: {
     type: String,
     required: [true, 'name is required'],

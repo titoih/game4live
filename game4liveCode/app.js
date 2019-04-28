@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -29,10 +31,15 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  res.locals.session = req.user;
+  next();
+})
+
 app.use('/', mainRouter);
 app.use('/', authRouter);
 app.use('/player', playerRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
